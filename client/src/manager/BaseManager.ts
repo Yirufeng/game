@@ -1,20 +1,16 @@
 /**
  * Created by Ace.C on 2016/4/13.
  */
-module manager {
-    export class BaseManager extends event.CustomEvent {
+class BaseManager extends GameEventDispatcher {
 
-        //游戏管理器
-        public gameManager:manager.GameManager;
+    //游戏管理器
+    public gameManager:GameManager;
 
-        public constructor() {
-            super();
+    public constructor() {
+        super();
+        this.gameManager = GameManager.getInstance();
+    }
 
-            this.gameManager = manager.GameManager.getInstance();
-        }
-
-        public initManager():void {
-
-        }
+    public initManager():void {
     }
 }

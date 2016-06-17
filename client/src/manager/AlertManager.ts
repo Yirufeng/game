@@ -1,54 +1,66 @@
 /**
  * Created by Ace.C on 2016/4/15.
  */
-module manager {
+class AlertManager extends BaseManager {
+
+    public gather:any = {};
+    public curAlert:BaseAlert;
+
+    public constructor() {
+        super();
+    }
+
+    public initManager():void {
+
+    }
+
     /**
-     * ��ʾ������
+     * 打开或者关闭
+     * @param id
      */
-    export class AlertManager extends BaseManager {
-
-        private classGather:any = {};
-        private alertGather:any = {};
-
-        public constructor() {
-            super();
+    public openOrClose(id:any):void {
+        var baseAlert:BaseAlert = this.gather[id];
+        if (!baseAlert) {
+            return;
         }
 
-        public initManager():void {
-            super.initManager();
-
+        if (!baseAlert.visible) {
+            this.open(id);
         }
-
-        public openOrClose(id:any):void {
-            var baseAlert:component.BaseAlert = this.alertGather[id];
-            if (baseAlert && baseAlert.visible) {
-                this.close(id);
-            }
-            else {
-                this.open(id);
-            }
+        else {
+            this.close(id);
         }
+    }
 
-        public open(id:any):void {
-            var baseAlert:component.BaseAlert = this.alertGather[id];
-            if (!baseAlert) {
-                baseAlert = new this.classGather[id];
-                this.alertGather[id] = baseAlert;
-            }
-            baseAlert.open();
+    /**
+     * 打开
+     * @param id
+     */
+    public open(id:any):void {
+        var baseAlert:BaseAlert = this.gather[id];
+        if (baseAlert) {
+            this.curAlert = baseAlert;
+            this.curAlert.open();
         }
+    }
 
-        public close(id:any):void {
-            var baseAlert:component.BaseAlert = this.alertGather[id];
-            if (baseAlert)baseAlert.close();
-        }
+    /**
+     * 关闭
+     * @param id
+     */
+    public close(id:any):void {
+        var baseAlert:BaseAlert = this.gather[id];
+        baseAlert.close();
+    }
 
-        public closeAll():void {
-            var baseAlert:component.BaseAlert;
-            for (var id in this.alertGather) {
-                baseAlert = this.alertGather[id];
-                baseAlert.close();
-            }
+    /**
+     * 关闭全部
+     */
+    public closeAll():void {
+        var baseAlert:BaseAlert;
+        for (var id in this.gather) {
+            baseAlert = this.gather[id];
+            baseAlert.close();
         }
     }
 }

@@ -1,37 +1,33 @@
 /**
  * Created by Ace.C on 2016/4/15.
  */
-module manager {
-    export class SceneManager extends BaseManager {
+class SceneManager extends BaseManager {
 
-        private classGather:any = {};
-        private sceneGather:any = {};
+    public gather:any = {};
+    public curScene:BaseScene;
 
+    public constructor() {
+        super();
+    }
 
-        public scene:component.BaseScene;
+    public initManager():void {
 
-        public constructor() {
-            super();
+    }
+
+    /**
+     * 打开
+     * @param id
+     */
+    public open(id:any):void {
+        if (!this.gather[id]) {
+            return;
         }
 
-        public initManager():void {
-            super.initManager();
-
+        if (this.curScene) {
+            this.curScene.close();
         }
 
-        public change(id:any):void {
-
-            if (this.scene && this.scene.visible) {
-                this.scene.close();
-            }
-
-            this.scene = this.sceneGather[id];
-            if (!this.scene) {
-                this.scene = new this.classGather[id];
-                this.sceneGather[id] = this.scene;
-            }
-
-            this.scene.open();
-        }
+        this.curScene = this.gather[id];
+        this.curScene.open();
     }
 }

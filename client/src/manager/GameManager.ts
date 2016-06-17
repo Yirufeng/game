@@ -1,34 +1,50 @@
 /**
  * Created by Ace.C on 2016/4/15.
  */
-module manager {
-    export class GameManager extends event.CustomEvent {
+class GameManager extends GameEventDispatcher {
 
-        private static _instance:manager.GameManager;
+    private static _instance:GameManager;
 
-        public static getInstance():manager.GameManager {
-            if (!this._instance) {
-                this._instance = new manager.GameManager();
-            }
-            return this._instance;
+    public static getInstance():GameManager {
+        if (!this._instance) {
+            this._instance = new GameManager();
         }
+        return this._instance;
+    }
 
-        //��ʾ����
-        public alertManager:manager.AlertManager;
-        //������
-        public panelManager:manager.PanelManager;
-        //��������
-        public sceneManager:manager.SceneManager;
+    public sceneManager:SceneManager;
+    public panelManager:PanelManager;
+    public alertManager:AlertManager;
 
-        public constructor() {
-            super();
-        }
+    public sceneLayer:eui.UILayer;
+    public panelLayer:eui.UILayer;
+    public alertLayer:eui.UILayer;
+    public tipsLayer:eui.UILayer;
 
-        public initManager():void {
+    public constructor() {
+        super();
 
-            this.alertManager = new manager.AlertManager();
-            this.panelManager = new manager.PanelManager();
-            this.sceneManager = new manager.SceneManager();
-        }
+        this.initLayer();
+        this.initManager();
+    }
+
+    public initLayer():void {
+        this.sceneLayer = new eui.UILayer();
+        core.stage.addChild(this.sceneLayer);
+
+        this.panelLayer = new eui.UILayer();
+        core.stage.addChild(this.panelLayer);
+
+        this.alertLayer = new eui.UILayer();
+        core.stage.addChild(this.alertLayer);
+
+        this.tipsLayer = new eui.UILayer();
+        core.stage.addChild(this.tipsLayer);
+    }
+
+    public initManager():void {
+        this.alertManager = new AlertManager();
+        this.panelManager = new PanelManager();
+        this.sceneManager = new SceneManager();
     }
 }
