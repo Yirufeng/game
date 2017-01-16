@@ -29,7 +29,5 @@ class OpeningScene extends BaseScene {
     private clickHandler(e: egret.TouchEvent) {
         this.card.x = Core.stage.stageWidth - this.card.width - 10;
         this.card.y = Core.stage.stageHeight - this.card.height - 10;
-        Majiang.dapai(GameDir4.East, GameDir4.East, e.currentTarget, 200, 300, function () {
-        });
     }
 }

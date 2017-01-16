@@ -1,7 +1,7 @@
 /**
  * Created by Ace.C on 2016/4/15.
  */
-class GameManager extends GameDispatcher {
+class GameManager extends BaseDispatcher {
 
     private static _instance: GameManager;
 

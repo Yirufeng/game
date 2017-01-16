@@ -50,7 +50,7 @@ class Core {
 
     //初始化
     static init(stage: egret.Stage): void {
-        Game.stage = stage;
+        Acekit.i.init(stage);
 
         Core.stage = stage;
 

@@ -1,7 +1,7 @@
 /**
  * Created by Ace.C on 2016/4/13.
  */
-class BaseManager extends GameDispatcher {
+class BaseManager extends BaseDispatcher {
 
     //游戏管理器
     public gameManager:GameManager;
